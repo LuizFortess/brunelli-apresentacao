@@ -138,7 +138,6 @@
         <div class="it"><span class="n">6</span><span class="tt">Segurança</span><span class="who"></span></div>
         <div class="it"><span class="n">7</span><span class="tt">UI vs UX</span><span class="who"></span></div>
         <div class="it"><span class="n">8</span><span class="tt">Testes de usabilidade</span><span class="who"></span></div>
-        <div class="it" style="grid-column:1/-1"><span class="n">9</span><span class="tt">Melhorias & próximos passos</span><span class="who"></span></div>
       </div>
     </div>
   </section>
@@ -311,19 +310,6 @@
     </div>
   </section>
 
-  <!-- 12 MELHORIAS / PRÓXIMOS PASSOS -->
-  <section class="slide">
-    <div class="wrap">
-      <span class="chip">09 · Melhorias & próximos passos</span>
-      <h2>Para o próximo semestre</h2>
-      <div class="grid">
-        <div class="card"><span class="ic">💬</span><h3>Relatório diário no WhatsApp</h3><p>Entradas e saídas do dia, saldo bancário, alertas e pendências — automático.</p></div>
-        <div class="card"><span class="ic">📲</span><h3>Aplicativo móvel</h3><p>Acesso em campo: chamados, listas de compra, mesma identidade visual.</p></div>
-        <div class="card"><span class="ic">🤖</span><h3>Plataforma de Compras com IA</h3><p>IA lê orçamentos em PDF e aponta o menor preço → aprovação → NF → histórico para cotações.</p></div>
-        <div class="card"><span class="ic">🧱</span><h3>Plano Essencial + Diárias de Obra</h3><p>Produção completa replicando o protótipo, mais avançada que a validação.</p></div>
-      </div>
-    </div>
-  </section>
 
   <!-- 13 ENCERRAMENTO -->
   <section class="slide">
@@ -350,7 +336,7 @@
 
 <script>
   const slides=[...document.querySelectorAll('.slide')];
-  const topics=['Capa','Agenda','1 · Introdução','1 · A solução','2 · Estudo de mercado','3 · Requisitos','4 · Metodologia XP','4 · Iteração com o cliente','5 · Arquitetura','6 · Segurança','7 · UI vs UX','8 · Usabilidade','▶ Demo ao vivo','9 · Próximos passos','Encerramento'];
+  const topics=['Capa','Agenda','1 · Introdução','1 · A solução','2 · Estudo de mercado','3 · Requisitos','4 · Metodologia XP','4 · Iteração com o cliente','5 · Arquitetura','6 · Segurança','7 · UI vs UX','8 · Usabilidade','▶ Demo ao vivo','Encerramento'];
   let i=0;
   function show(n){
     i=Math.max(0,Math.min(slides.length-1,n));
