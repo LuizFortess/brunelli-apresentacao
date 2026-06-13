@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brunelli Sistema — Apresentação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Lora:ital,wght@0,500;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0e1630; --navy2:#16224a; --panel:#141d3c; --gold:#d8b15a; --gold2:#f0cf86;
+    --t1:#f4f1ea; --t2:#b9c0d4; --t3:#7f88a6; --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.18);
+    --accent:#6c8cff; --green:#43d39e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:radial-gradient(1200px 700px at 80% -10%, #20305f 0%, transparent 55%), linear-gradient(180deg,#0e1630,#0a1024);
+    color:var(--t1); font-family:'Sora',system-ui,sans-serif; overflow:hidden; -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace}
+  .serif{font-family:'Lora',serif;font-style:italic}
+
+  /* top bar */
+  header{position:fixed;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 26px;z-index:50;background:linear-gradient(180deg,rgba(10,16,36,.85),transparent)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+  .brand .dot{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:800;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1406}
+  .brand small{color:var(--t3);font-weight:400}
+  .demoBtn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#0e1630;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));padding:9px 16px;border-radius:999px;text-decoration:none;
+    box-shadow:0 6px 22px -8px rgba(216,177,90,.7);transition:transform .2s}
+  .demoBtn:hover{transform:translateY(-1px)}
+
+  /* deck */
+  .deck{position:fixed;inset:0;display:grid;place-items:center;padding:84px 6vw 70px}
+  .slide{position:absolute;inset:0;display:none;place-items:center;padding:84px 6vw 76px;
+    opacity:0;transition:opacity .45s ease}
+  .slide.active{display:grid;opacity:1;animation:fade .5s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .wrap{width:100%;max-width:1080px}
+
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;
+    text-transform:uppercase;color:var(--t1);border:1px solid var(--line2);padding:5px 13px;border-radius:999px}
+  .chip b{color:var(--gold2);font-weight:600}
+  h1{font-size:clamp(38px,7vw,78px);font-weight:800;line-height:1.03;letter-spacing:-.03em;margin:18px 0}
+  h2{font-size:clamp(28px,4.6vw,52px);font-weight:800;letter-spacing:-.02em;line-height:1.07;margin:14px 0 18px}
+  h3{font-size:18px;font-weight:700;margin-bottom:6px}
+  p.lead{font-size:clamp(16px,2vw,21px);color:var(--t2);max-width:760px;line-height:1.5}
+  .num{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:14px}
+
+  .stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+  .stat{border:1px solid var(--line);border-radius:14px;padding:16px 22px;background:rgba(255,255,255,.03);min-width:130px}
+  .stat b{display:block;font-family:'Lora',serif;font-style:italic;font-size:30px;color:var(--gold2);line-height:1}
+  .stat span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:.5px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
+  .card h3{color:var(--t1)} .card p{color:var(--t2);font-size:14.5px;line-height:1.5}
+  .card .ic{font-size:22px;margin-bottom:10px;display:block}
+
+  ul.feat{margin-top:18px;list-style:none;display:grid;gap:11px;max-width:840px}
+  ul.feat li{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;color:var(--t2);line-height:1.45}
+  ul.feat li::before{content:"▸";color:var(--gold);font-size:14px;margin-top:3px}
+  ul.feat li b{color:var(--t1);font-weight:600}
+
+  .agenda{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;margin-top:24px}
+  .agenda .it{display:flex;align-items:center;gap:14px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+  .agenda .n{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:700;font-size:15px;min-width:22px}
+  .agenda .tt{font-weight:600;font-size:15.5px}
+  .agenda .who{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--t3)}
+
+  /* demo slide */
+  .demoWrap{display:grid;grid-template-columns:1.3fr .9fr;gap:34px;align-items:center}
+  .qr{background:#fff;padding:16px;border-radius:18px;display:grid;place-items:center;box-shadow:0 20px 60px -20px #000}
+  .qr img{display:block;width:230px;height:230px}
+  .bigDemo{display:inline-flex;align-items:center;gap:10px;font-size:18px;font-weight:700;color:#0e1630;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));padding:16px 30px;border-radius:14px;text-decoration:none;margin-top:20px;
+    box-shadow:0 12px 40px -12px rgba(216,177,90,.7)}
+  .linkmono{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--gold2);word-break:break-all}
+
+  /* footer / nav */
+  footer{position:fixed;bottom:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 26px;z-index:50}
+  .nav{display:flex;align-items:center;gap:10px}
+  .nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:rgba(255,255,255,.05);
+    color:var(--t1);font-size:17px;cursor:pointer;transition:.2s}
+  .nav button:hover{background:rgba(255,255,255,.12)}
+  .counter{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--t3)}
+  .progress{position:fixed;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .4s;z-index:60}
+  .hint{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)}
+
+  @media(max-width:820px){
+    .grid,.agenda,.demoWrap{grid-template-columns:1fr}
+    .demoWrap{text-align:center}.qr{margin:0 auto}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="dot">B</span> Brunelli Sistema <small class="mono">· apresentação</small></div>
+  <a class="demoBtn" href="https://luizfortess.github.io/brunelli-demo/" target="_blank" rel="noopener">▶ Ver demo ao vivo</a>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 0 CAPA -->
+  <section class="slide active">
+    <div class="wrap">
+      <div class="eyebrow">Brunelli Empreendimentos · Sistema de Gestão</div>
+      <h1>Brunelli <span class="serif" style="color:var(--gold2)">Sistema</span></h1>
+      <p class="lead">Plataforma única de gestão operacional e financeira de propriedades — finanças, contratos, galpões, manutenção e compras, com acesso por perfil e automação por IA.</p>
+      <div class="stats">
+        <div class="stat"><b>46</b><span>galpões</span></div>
+        <div class="stat"><b>6</b><span>condomínios</span></div>
+        <div class="stat"><b>4</b><span>perfis</span></div>
+        <div class="stat"><b>25</b><span>telas</span></div>
+      </div>
+      <p class="hint" style="margin-top:34px">use as setas ← →  (ou espaço) para navegar</p>
+    </div>
+  </section>
+
+  <!-- 1 AGENDA -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow">Roteiro de hoje</div>
+      <h2>Agenda da apresentação</h2>
+      <div class="agenda">
+        <div class="it"><span class="n">1</span><span class="tt">Introdução</span><span class="who">Luiz</span></div>
+        <div class="it"><span class="n">2</span><span class="tt">Estudo de mercado</span><span class="who"></span></div>
+        <div class="it"><span class="n">3</span><span class="tt">Departamento de Requisitos</span><span class="who"></span></div>
+        <div class="it"><span class="n">4</span><span class="tt">Metodologia XP</span><span class="who"></span></div>
+        <div class="it"><span class="n">5</span><span class="tt">Arquitetura do projeto</span><span class="who">Luiz</span></div>
+        <div class="it"><span class="n">6</span><span class="tt">Segurança</span><span class="who"></span></div>
+        <div class="it"><span class="n">7</span><span class="tt">UI vs UX</span><span class="who"></span></div>
+        <div class="it"><span class="n">8</span><span class="tt">Testes de usabilidade</span><span class="who"></span></div>
+        <div class="it" style="grid-column:1/-1"><span class="n">9</span><span class="tt">Melhorias & próximos passos</span><span class="who">Luiz</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 INTRODUÇÃO -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">01 · Introdução · <b>Luiz</b></span>
+      <h2>De planilhas avulsas a um <span class="serif" style="color:var(--gold2)">sistema só</span>.</h2>
+      <p class="lead">A gestão era descentralizada — planilhas soltas, papel e WhatsApp — sem visão consolidada e dependente de processo manual.</p>
+      <ul class="feat">
+        <li><b>Sem visão consolidada</b> de inadimplência e receitas</li>
+        <li><b>Retrabalho manual</b> e informação dispersa, difícil de acessar</li>
+        <li><b>Risco de perder prazos</b> contratuais</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 SOLUÇÃO -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">01 · Introdução · <b>Luiz</b></span>
+      <h2>A solução</h2>
+      <p class="lead">Um único sistema web que centraliza finanças, contratos, galpões, manutenção e compras — com acesso por perfil e automação por inteligência artificial.</p>
+      <div class="grid">
+        <div class="card"><span class="ic">🎯</span><h3>Centralização total</h3><p>Tudo num lugar: financeiro, contratos, galpões, manutenção e compras.</p></div>
+        <div class="card"><span class="ic">🔐</span><h3>Acesso por perfil</h3><p>Cada usuário vê e faz apenas o que o seu papel permite.</p></div>
+        <div class="card"><span class="ic">🤖</span><h3>Automação por IA</h3><p>Leitura de NFs, orçamentos e documentos — sem digitação manual.</p></div>
+        <div class="card"><span class="ic">✨</span><h3>Imagem profissional</h3><p>Foco em qualidade, organização e apresentação executiva.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ESTUDO DE MERCADO -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">02 · Estudo de mercado</span>
+      <h2>Um nicho carente de solução integrada</h2>
+      <p class="lead">A administração de galpões e condomínios logísticos é fragmentada: planilhas dispersas ou sistemas genéricos que não falam a língua do negócio.</p>
+      <div class="grid">
+        <div class="card"><h3>De → Para</h3><p>Planilhas dispersas → plataforma única · digitação manual → IA · genérico → sob medida.</p></div>
+        <div class="card"><h3>Oportunidade</h3><p>ERP feito sob medida para gestão imobiliária/logística, com IA — espaço pouco atendido no mercado.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 REQUISITOS -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">03 · Departamento de Requisitos</span>
+      <h2>Do levantamento ao escopo</h2>
+      <p class="lead">Requisitos levantados com o cliente e consolidados num briefing master revisado por auditorias.</p>
+      <ul class="feat">
+        <li><b>4 perfis de acesso</b>, <b>25 telas</b>, <b>11 módulos</b> integrados</li>
+        <li><b>Navegação em funil</b>: condomínio → galpão → ficha individual</li>
+        <li><b>Financeiro completo</b>: entradas, saídas, aprovações, inadimplência, reajustes, recibos</li>
+        <li><b>IA</b> para compras e leitura de notas fiscais</li>
+        <li><b>Relatório diário</b> e <b>acesso móvel</b> em campo</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6 METODOLOGIA XP (valores) -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">04 · Metodologia XP</span>
+      <h2>Extreme Programming <span class="serif" style="color:var(--gold2)">na prática</span></h2>
+      <p class="lead">Desenvolvimento ágil guiado pelos <b>5 valores do XP</b> — cliente presente, entregas pequenas e foco no que realmente agrega.</p>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr))">
+        <div class="card"><span class="ic">💬</span><h3>Comunicação</h3><p>Contato constante com o cliente a cada etapa — alinhamento contínuo, nada de suposição.</p></div>
+        <div class="card"><span class="ic">✂️</span><h3>Simplicidade</h3><p>Foco no prático: entregar o que agrega valor, sem complexidade desnecessária.</p></div>
+        <div class="card"><span class="ic">🔁</span><h3>Feedback</h3><p>Validação do cliente a cada iteração — protótipo aprovado antes de codar.</p></div>
+        <div class="card"><span class="ic">🛡️</span><h3>Coragem</h3><p>Refatorar e evoluir com confiança, sustentado por versionamento disciplinado.</p></div>
+        <div class="card"><span class="ic">🤝</span><h3>Respeito</h3><p>Respeito ao cliente, ao time e ao código — decisões transparentes e colaborativas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6b ITERAÇÃO / SPRINTS -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">04 · Iteração com o cliente</span>
+      <h2>Pequenas entregas, <span class="serif" style="color:var(--gold2)">validando sempre</span></h2>
+      <p class="lead">O protótipo HTML de 25 telas — aprovado pelo cliente — é a <b>“lei visual”</b>. Cada sprint entrega valor incremental, revisado pelo cliente.</p>
+      <div class="grid">
+        <div class="card"><span class="num">Sprints 1–2</span><h3>Base & Financeiro</h3></div>
+        <div class="card"><span class="num">Sprints 3–4</span><h3>Galpões & Contratos</h3></div>
+        <div class="card"><span class="num">Sprints 5–6</span><h3>Compras & IA</h3></div>
+        <div class="card"><span class="num">Sprints 7–8</span><h3>Mobile & Refinamento</h3></div>
+      </div>
+      <p class="lead" style="margin-top:18px;font-size:16px">Checkpoint de revisão do cliente a cada sprint · pequenas entregas (<i>small releases</i>) · o cliente presente em todo o ciclo.</p>
+    </div>
+  </section>
+
+  <!-- 7 ARQUITETURA -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">05 · Arquitetura do projeto · <b>Luiz</b></span>
+      <h2>Stack moderna e escalável</h2>
+      <div class="grid">
+        <div class="card"><span class="ic">⚛️</span><h3>Frontend</h3><p>React + Vite + TypeScript — design system próprio, responsivo.</p></div>
+        <div class="card"><span class="ic">🗄️</span><h3>Backend</h3><p>Supabase — PostgreSQL, autenticação e segurança por linha (RLS).</p></div>
+        <div class="card"><span class="ic">🚀</span><h3>Deploy</h3><p>Vercel (produção) · GitHub Pages (demo navegável).</p></div>
+        <div class="card"><span class="ic">🔌</span><h3>Integrações</h3><p>IA via funções seguras · WhatsApp (Z-API) · exportação Excel.</p></div>
+      </div>
+      <ul class="feat" style="margin-top:16px">
+        <li>Arquitetura <b>multi-perfil</b> e navegação de galpões em <b>2 níveis</b></li>
+        <li>Para a demo: <b>camada de dados isolada</b> com dados 100% fictícios, sem banco real</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8 SEGURANÇA -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">06 · Segurança</span>
+      <h2>Segurança em camadas</h2>
+      <ul class="feat">
+        <li><b>Login por perfil + PIN</b> (bcrypt); sessão expira ao fechar a aba</li>
+        <li><b>Segurança no banco</b>: RLS + funções <span class="mono">SECURITY DEFINER</span> — o frontend nunca escreve direto nas tabelas</li>
+        <li><b>IA roda no backend</b>, nunca exposta na interface</li>
+        <li><b>LGPD</b>: a demo usa dados <b>100% fictícios</b>, isolada e sem conexão ao banco real — nenhum dado de cliente é exposto</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9 UI vs UX -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">07 · UI vs UX</span>
+      <h2>Forma <span style="color:var(--t3)">e</span> função</h2>
+      <div class="grid">
+        <div class="card"><span class="ic">🎨</span><h3>UI — a forma</h3><p>Identidade executiva (navy + dourado), tipografia cuidada, 25 telas consistentes e responsivas. O protótipo é a “lei visual”.</p></div>
+        <div class="card"><span class="ic">🧭</span><h3>UX — a experiência</h3><p>Navegação em funil intuitiva, números calculados automaticamente, cada perfil acessa só o que precisa, ações rápidas.</p></div>
+      </div>
+      <p class="lead" style="margin-top:18px;font-size:16px">Resultado: qualidade, organização e imagem profissional em cada tela.</p>
+    </div>
+  </section>
+
+  <!-- 10 TESTES DE USABILIDADE -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">08 · Testes de usabilidade</span>
+      <h2>Validado com o cliente</h2>
+      <ul class="feat">
+        <li><b>Apresentação executiva</b> e validação com stakeholders</li>
+        <li><b>Protótipo aprovado</b> pelo cliente — base para o desenvolvimento</li>
+        <li><b>Documentos de teste</b> da plataforma de compras</li>
+        <li><b>Demo navegável</b> usada para validar os fluxos reais — veja a seguir ▶</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11 DEMO AO VIVO -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip" style="border-color:var(--gold);color:var(--gold2)">▶ Demo ao vivo</span>
+      <div class="demoWrap">
+        <div>
+          <h2 style="margin-top:14px">Navegue pelo sistema<br>com dados <span class="serif" style="color:var(--gold2)">fictícios</span></h2>
+          <p class="lead">Todas as telas funcionando — financeiro, galpões, contratos, diárias, agenda. Nenhum dado real é exibido (LGPD).</p>
+          <a class="bigDemo" href="https://luizfortess.github.io/brunelli-demo/" target="_blank" rel="noopener">Abrir o demo →</a>
+          <div class="linkmono">luizfortess.github.io/brunelli-demo</div>
+          <p class="hint" style="margin-top:12px">Entrar: clique num perfil + qualquer senha</p>
+        </div>
+        <div class="qr">
+          <img alt="QR do demo" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=0&data=https://luizfortess.github.io/brunelli-demo/">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 MELHORIAS / PRÓXIMOS PASSOS -->
+  <section class="slide">
+    <div class="wrap">
+      <span class="chip">09 · Melhorias & próximos passos · <b>Luiz</b></span>
+      <h2>Para o próximo semestre</h2>
+      <div class="grid">
+        <div class="card"><span class="ic">💬</span><h3>Relatório diário no WhatsApp</h3><p>Entradas e saídas do dia, saldo bancário, alertas e pendências — automático.</p></div>
+        <div class="card"><span class="ic">📲</span><h3>Aplicativo móvel</h3><p>Acesso em campo: chamados, listas de compra, mesma identidade visual.</p></div>
+        <div class="card"><span class="ic">🤖</span><h3>Plataforma de Compras com IA</h3><p>IA lê orçamentos em PDF e aponta o menor preço → aprovação → NF → histórico para cotações.</p></div>
+        <div class="card"><span class="ic">🧱</span><h3>Plano Essencial + Diárias de Obra</h3><p>Produção completa replicando o protótipo, mais avançada que a validação.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 ENCERRAMENTO -->
+  <section class="slide">
+    <div class="wrap" style="text-align:center">
+      <div class="eyebrow" style="text-align:center">Brunelli Sistema</div>
+      <h1 style="margin:18px auto">Seguro · escalável<br><span class="serif" style="color:var(--gold2)">profissional</span></h1>
+      <p class="lead" style="margin:0 auto">Qualidade · Organização · Imagem profissional.</p>
+      <a class="bigDemo" href="https://luizfortess.github.io/brunelli-demo/" target="_blank" rel="noopener" style="margin-top:26px">▶ Ver o demo ao vivo</a>
+      <p class="hint" style="margin-top:20px">Obrigado.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="progress" id="bar" style="width:0"></div>
+<footer>
+  <span class="hint mono" id="topic">Capa</span>
+  <div class="nav">
+    <button id="prev" aria-label="anterior">‹</button>
+    <span class="counter" id="counter">1 / 14</span>
+    <button id="next" aria-label="próximo">›</button>
+  </div>
+</footer>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const topics=['Capa','Agenda','1 · Introdução','1 · A solução','2 · Estudo de mercado','3 · Requisitos','4 · Metodologia XP','4 · Iteração com o cliente','5 · Arquitetura','6 · Segurança','7 · UI vs UX','8 · Usabilidade','▶ Demo ao vivo','9 · Próximos passos','Encerramento'];
+  let i=0;
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    document.getElementById('counter').textContent=(i+1)+' / '+slides.length;
+    document.getElementById('bar').style.width=((i)/(slides.length-1)*100)+'%';
+    document.getElementById('topic').textContent=topics[i]||'';
+  }
+  function next(){show(i+1)} function prev(){show(i-1)}
+  document.getElementById('next').onclick=next;
+  document.getElementById('prev').onclick=prev;
+  addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next()}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}
+    if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);
+  });
+  // toque/click nas laterais
+  addEventListener('click',e=>{
+    if(e.target.closest('a,button')) return;
+    const x=e.clientX/innerWidth;
+    if(x>0.62)next(); else if(x<0.38)prev();
+  });
+  show(0);
+</script>
+</body>
+</html>
